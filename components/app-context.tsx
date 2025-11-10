@@ -80,7 +80,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [messages, setMessages] = useState<Message[]>([])
   const [selectedTopic, setSelectedTopic] = useState("JavaScript")
   const [isLoading, setIsLoading] = useState(false)
-  const [selectedModel, setSelectedModel] = useState("llama2")
+  const [selectedModel, setSelectedModel] = useState("gemma3:1b")
   const [learningStreak, setLearningStreak] = useState(0)
   const [questionsAnswered, setQuestionsAnswered] = useState(0)
   const [topicsMastered, setTopicsMastered] = useState(0)

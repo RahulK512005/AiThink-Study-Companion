@@ -15,7 +15,7 @@ const DEFAULT_SYSTEM_PROMPT = `You are AiThink, a friendly offline AI tutor. Exp
 /**
  * Query a single Ollama model using the /api/generate endpoint.
  */
-export async function queryOllama(prompt: string, model = "llama2", options = { temperature: 0.7 }): Promise<OllamaResult> {
+export async function queryOllama(prompt: string, model = "gemma3:1b", options = { temperature: 0.7 }): Promise<OllamaResult> {
   try {
     const body = {
       model,
@@ -73,7 +73,7 @@ export async function queryAllModels(prompt: string) {
   return results;
 }
 
-export async function explainTopic(topic: string, model = "llama2") {
+export async function explainTopic(topic: string, model = "gemma3:1b") {
   try {
     const prompt = `Provide a clear, beginner-friendly explanation of "${topic}" in 2-3 paragraphs. Include key concepts and examples.`;
     return await queryOllama(prompt, model);
@@ -87,7 +87,7 @@ export async function explainTopic(topic: string, model = "llama2") {
   }
 }
 
-export async function generateQuiz(topic: string, model = "llama2", count = 20) {
+export async function generateQuiz(topic: string, model = "gemma3:1b", count = 20) {
   try {
     const prompt = `Generate exactly ${count} multiple choice questions about "${topic}". Each question must have exactly 4 options. Format as JSON: {"questions": [{"question": "question text", "options": ["A", "B", "C", "D"], "answer": "correct option", "explanation": "why this is correct"}]}`;
     return await queryOllama(prompt, model);
@@ -101,7 +101,7 @@ export async function generateQuiz(topic: string, model = "llama2", count = 20) 
   }
 }
 
-export async function generatePractice(topic: string, model = "llama2") {
+export async function generatePractice(topic: string, model = "gemma3:1b") {
   try {
     const prompt = `Generate 5 practice problems about "${topic}". Format as JSON: {"problems": [{"question": "problem text", "type": "mcq" or "input", "options": ["A", "B", "C", "D"] (if mcq), "answer": "correct answer", "solution": "detailed solution"}]}`;
     return await queryOllama(prompt, model);

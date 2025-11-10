@@ -129,8 +129,7 @@ export function DocumentationSection() {
           <div className="text-slate-300">
             <p className="mb-4">Choose from different Ollama models in the dashboard header:</p>
             <ul className="list-disc list-inside ml-4 text-slate-400">
-              <li><strong>Llama 2:</strong> General-purpose, balanced performance</li>
-              <li><strong>Gemma 3 1B:</strong> Fast, lightweight model</li>
+              <li><strong>Gemma 3 1B (Recommended):</strong> Best balance of speed and accuracy</li>
               <li><strong>Qwen 2.5 0.5B:</strong> Ultra-fast, minimal resource usage</li>
               <li><strong>TinyLlama:</strong> Smallest model, quickest responses</li>
             </ul>
@@ -146,8 +145,8 @@ export function DocumentationSection() {
               <ol className="list-decimal list-inside ml-4 text-slate-400 space-y-1">
                 <li>Download Ollama from <a href="https://ollama.ai" target="_blank" className="text-blue-400 hover:underline">ollama.ai</a></li>
                 <li>Install and start Ollama service</li>
-                <li>Pull models: <code className="bg-slate-800 px-2 py-1 rounded">ollama pull llama2</code></li>
-                <li>Pull other models as needed (tinyllama, gemma3:1b, qwen2.5:0.5b)</li>
+                <li>Pull recommended model: <code className="bg-slate-800 px-2 py-1 rounded">ollama pull gemma3:1b</code></li>
+                <li>Pull other models as needed (tinyllama, qwen2.5:0.5b)</li>
               </ol>
             </div>
 

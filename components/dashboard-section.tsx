@@ -26,8 +26,7 @@ export function DashboardSection() {
             backdropFilter: "blur(10px)",
           }}
         >
-          <option value="llama2">Llama 2</option>
-          <option value="gemma3:1b">Gemma 3 1B</option>
+          <option value="gemma3:1b">Gemma 3 1B (Recommended)</option>
           <option value="qwen2.5:0.5b">Qwen 2.5 0.5B</option>
           <option value="tinyllama">TinyLlama</option>
         </select>

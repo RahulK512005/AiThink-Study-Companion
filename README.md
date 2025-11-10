@@ -57,11 +57,12 @@ npm install --legacy-peer-deps
 
 3. **Install Ollama models**
 ```bash
-ollama pull llama2
-ollama pull tinyllama
 ollama pull gemma3:1b
+ollama pull tinyllama
 ollama pull qwen2.5:0.5b
 ```
+
+**Recommended**: Use **Gemma 3 1B** for the best balance of speed and accuracy.
 
 4. **Start Ollama service**
 ```bash
@@ -140,10 +141,11 @@ The app supports multiple Ollama models:
 
 | Model | Size | Speed | Best For |
 |-------|------|-------|----------|
-| Llama 2 | ~4GB | Medium | General purpose |
-| Gemma 3 1B | ~1GB | Fast | Quick responses |
+| Gemma 3 1B ⭐ | ~1GB | Fast | **Recommended - Best balance** |
 | Qwen 2.5 0.5B | ~500MB | Very Fast | Lightweight tasks |
 | TinyLlama | ~600MB | Fastest | Minimal resources |
+
+⭐ **Gemma 3 1B is recommended** for optimal performance and accuracy.
 
 ## 🌐 Deployment
 
