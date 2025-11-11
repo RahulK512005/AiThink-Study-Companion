@@ -1,5 +1,5 @@
 // lib/ollama.ts
-import { mockQuizzes, mockExplanations, mockChatResponses } from "./mock-data";
+import { mockQuizzes, mockExplanations, getIntelligentResponse } from "./mock-data";
 
 export type OllamaResult = {
   model: string;
@@ -30,22 +30,22 @@ export async function queryOllama(prompt: string, model = "gemma3:1b", options =
     });
 
     if (!res.ok) {
-      console.warn(`[ollama] HTTP ${res.status}, Ollama not available`);
-      return { model: "mock", success: false, output: `I apologize, but I cannot answer "${prompt}" right now. Please ensure Ollama is running with the ${model} model installed. Run: ollama pull ${model}`, error: "Ollama not available" };
+      console.warn(`[ollama] HTTP ${res.status}, using offline mode`);
+      return { model: "offline", success: true, output: getIntelligentResponse(prompt), error: undefined };
     }
 
     const json = await res.json();
     const output = json?.response || "";
 
     if (!output) {
-      console.warn("[ollama] Empty response from Ollama");
-      return { model: "mock", success: false, output: `I received an empty response. Please check if the ${model} model is properly installed.`, error: "Empty response" };
+      console.warn("[ollama] Empty response, using offline mode");
+      return { model: "offline", success: true, output: getIntelligentResponse(prompt), error: undefined };
     }
 
     return { model, success: true, output: String(output), raw: json };
   } catch (err: any) {
-    console.warn("[ollama] Error:", err.message);
-    return { model: "mock", success: false, output: `Cannot connect to Ollama. Please start Ollama and ensure the ${model} model is installed. Error: ${err.message}`, error: err.message };
+    console.warn("[ollama] Error, using offline mode:", err.message);
+    return { model: "offline", success: true, output: getIntelligentResponse(prompt), error: undefined };
   }
 }
 
@@ -58,14 +58,14 @@ export async function queryAllModels(prompt: string) {
   const promises = models.map((m) => queryOllama(prompt, m));
   const results = await Promise.all(promises);
 
-  // If all failed, fall back to mock content for UX resilience
+  // If all failed, use offline intelligent responses
   const allFailed = results.every((r) => !r.success);
   if (allFailed) {
-    console.warn("[ollama] all models failed, returning mock responses");
-    return models.map((m, i) => ({
-      model: m,
+    console.warn("[ollama] all models failed, using offline mode");
+    return models.map((m) => ({
+      model: "offline",
       success: true,
-      output: getRandomMockResponse(),
+      output: getIntelligentResponse(prompt),
       raw: null,
     }));
   }
@@ -115,7 +115,4 @@ export async function generatePractice(topic: string, model = "gemma3:1b") {
   }
 }
 
-function getRandomMockResponse(): string {
-  const allResponses = Object.values(mockChatResponses).flat();
-  return allResponses[Math.floor(Math.random() * allResponses.length)];
-}
+

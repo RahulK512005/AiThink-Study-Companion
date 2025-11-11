@@ -7,10 +7,19 @@ An AI-powered offline-first educational platform built with Next.js and Ollama, 
 ![Ollama](https://img.shields.io/badge/Ollama-AI-green?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
+## 🎥 Demo Video
+
+[![Watch Demo](https://img.shields.io/badge/▶️_Watch_Demo-Google_Drive-blue?style=for-the-badge)](https://drive.google.com/file/d/15cFXhKiH9s2Pk6YwS1bFzu3yN7Tr513P/view?usp=drive_link)
+
+**[Click here to watch the full demo video](https://drive.google.com/file/d/15cFXhKiH9s2Pk6YwS1bFzu3yN7Tr513P/view?usp=drive_link)**
+
 ## ✨ Features
 
 ### 🎯 Learning Dashboard
-- **💬 AI Chat**: Ask questions and get instant answers from local AI models
+- **💬 AI Chat**: Ask questions and get instant answers - **Works 100% Offline!**
+  - Answers questions on Science, Math, Physics, Geography, Programming, History, and more
+  - Intelligent fallback when Ollama is unavailable
+  - 20+ topics covered in offline knowledge base
 - **📝 Quiz Generator**: Create 20 MCQ questions on any topic with Easy/Medium/Hard levels
 - **💡 Explain Tab**: Get detailed explanations on complex topics
 - **🎯 Practice Problems**: Solve problems with instant feedback and solutions
@@ -39,7 +48,7 @@ An AI-powered offline-first educational platform built with Next.js and Ollama, 
 ### Prerequisites
 
 - Node.js 18+ installed
-- [Ollama](https://ollama.ai) installed and running
+- [Ollama](https://ollama.ai) installed and running (Optional - app works offline without it!)
 - Git
 
 ### Installation
@@ -55,29 +64,28 @@ cd AiThink-Study-Companion
 npm install --legacy-peer-deps
 ```
 
-3. **Install Ollama models**
-```bash
-ollama pull gemma3:1b
-ollama pull tinyllama
-ollama pull qwen2.5:0.5b
-```
-
-**Recommended**: Use **Gemma 3 1B** for the best balance of speed and accuracy.
-
-4. **Start Ollama service**
-```bash
-ollama serve
-```
-
-5. **Run the development server**
+3. **Run the development server**
 ```bash
 npm run dev
 ```
 
-6. **Open your browser**
+4. **Open your browser**
 ```
 http://localhost:3000
 ```
+
+### Optional: Enhanced AI with Ollama
+
+For advanced AI capabilities, install Ollama models:
+
+```bash
+ollama pull gemma3:1b
+ollama pull tinyllama
+ollama pull qwen2.5:0.5b
+ollama serve
+```
+
+**Note**: The app works perfectly without Ollama using the built-in offline knowledge base!
 
 ## 🛠️ Tech Stack
 
@@ -135,9 +143,28 @@ AiThink-Study-Companion/
 - Quick navigation shortcuts
 - Logout
 
-## 🤖 AI Models
+## 🤖 AI Modes
 
-The app supports multiple Ollama models:
+### 🌐 Offline Mode (Default)
+**No installation required!** Built-in knowledge base covers:
+- 🌍 Geography: World capitals (France, India, USA, Japan, etc.)
+- 🔬 Science: Photosynthesis, cells, DNA, periodic table
+- ⚛️ Physics: Car engines, quantum physics, black holes
+- 🪐 Space: Solar system, planets
+- 💻 Programming: Python, coding basics
+- 📐 Math: Algebra, calculus, geometry
+- 📚 History: World wars, major events
+- 🌡️ Environment: Climate change
+- ❤️ Biology: Human body, heart, DNA
+- 💰 Economics: Supply and demand
+
+**Try asking:**
+- "What is the capital of France?"
+- "Explain photosynthesis"
+- "How does a car engine work?"
+- "What is quantum physics?"
+
+### 🚀 Enhanced Mode (Optional - With Ollama)
 
 | Model | Size | Speed | Best For |
 |-------|------|-------|----------|
@@ -159,7 +186,7 @@ The app supports multiple Ollama models:
    - Install Command: `npm install --legacy-peer-deps`
 4. Deploy
 
-**Note**: Ollama runs locally, so deployed version uses fallback content. For production AI, host Ollama separately and update `NEXT_PUBLIC_OLLAMA_URL`.
+**Note**: Deployed version automatically uses offline mode with built-in knowledge base. For enhanced AI, host Ollama separately and update `NEXT_PUBLIC_OLLAMA_URL`.
 
 ## 🔧 Configuration
 
@@ -218,18 +245,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🐛 Known Issues
 
-- Ollama must be running locally for AI features
-- Large models require significant RAM
-- First response may be slow (model loading)
+- Enhanced AI mode requires Ollama running locally
+- Large Ollama models require significant RAM
+- First Ollama response may be slow (model loading)
+- Offline mode covers 20+ topics (expandable in `lib/mock-data.ts`)
 
 ## 🗺️ Roadmap
 
+- [x] Offline AI knowledge base (20+ topics)
+- [x] Intelligent keyword matching
+- [ ] Expand offline knowledge to 100+ topics
 - [ ] Cloud-hosted Ollama integration
 - [ ] Multi-language support
 - [ ] Voice input/output
 - [ ] Collaborative learning features
 - [ ] Mobile app version
-- [ ] Offline mode improvements
 
 ---
 

@@ -8,6 +8,8 @@ export function ChatTab() {
   const { messages, addMessage, isLoading, setIsLoading, selectedModel } = useApp()
   const [userInput, setUserInput] = useState("")
 
+  const [isOfflineMode, setIsOfflineMode] = useState(false)
+
   const handleSend = async () => {
     if (!userInput.trim() || isLoading) return
 
@@ -17,6 +19,7 @@ export function ChatTab() {
 
     try {
       const aiResponse = await queryOllama(userInput, selectedModel)
+      setIsOfflineMode(aiResponse.model === "offline")
       addMessage("assistant", aiResponse.output || "No response")
     } catch (error) {
       addMessage("assistant", "Sorry, I couldn't process that. Please try again.")
@@ -27,6 +30,13 @@ export function ChatTab() {
 
   return (
     <div className="flex flex-col h-[600px] gap-4">
+      {/* Offline Mode Banner */}
+      {isOfflineMode && (
+        <div className="px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-200 text-sm">
+          📡 Offline Mode: Using built-in knowledge base. For advanced AI, start Ollama.
+        </div>
+      )}
+      
       {/* Messages */}
       <div className="flex-1 overflow-y-auto space-y-4 pr-2">
         {messages.length === 0 ? (
